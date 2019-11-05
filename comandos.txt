@@ -1,0 +1,7 @@
+sudo nano /etc/rc.local
+
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+sudo nano /etc/network/interfaces
+
+ls -l /dev/disk/by-uuid/

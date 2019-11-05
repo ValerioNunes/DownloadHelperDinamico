@@ -1,4 +1,7 @@
 {
-    "delay": 2,
-    "locomotiva": 853
+    "delay": 11,
+    "locomotiva": 9020,
+    "origem": "/media/usb",
+    "status": "start",
+    "url": "http://172.20.15.22/hd/LogHelperDinamico/SalvarLog"
 }
