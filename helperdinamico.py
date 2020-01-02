@@ -9,8 +9,9 @@ def reset():
   
 try:  
 	while(downloadHD.openParametros()):
-		par.verificarMundacaDeParametros()
-
+		parAlterados = par.verificarMundacaDeParametros()
+		if(parAlterados):
+    			break
 		for i in range(10):
 			if(downloadHD.openParametros()):
 				#downloadHD.main()

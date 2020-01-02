@@ -4,15 +4,22 @@ import thread
 import time
 import os
 
+delay =  1
+led =  True
+ledPin =  24
 statusLed = False
+
 if (os.name == 'posix'):
 	import RPi.GPIO as GPIO          
 	GPIO.setmode(GPIO.BCM)            
-	GPIO.setup(24, GPIO.OUT)
+	GPIO.setup(ledPin, GPIO.OUT)
 	statusLed = True
 
-delay =  1
-led =  True
+
+def ligarLed():
+		GPIO.output(ledPin, 1)
+		sleep(5) 
+
 
 def falhaPendrive():
 	global delay
@@ -31,13 +38,13 @@ def print_time( threadName):
 	try:
 		if(statusLed):
 			while led:
-				GPIO.output(24, 1)         # set GPIO24 to 1/GPIO.HIGH/True  
+				GPIO.output(ledPin, 1)         # set GPIOledPin to 1/GPIO.HIGH/True  
 				sleep(delay)                 # wait half a second  
-				GPIO.output(24, 0)         # set GPIO24 to 0/GPIO.LOW/False  
+				GPIO.output(ledPin, 0)         # set GPIOledPin to 0/GPIO.LOW/False  
 				sleep(delay) 
-			GPIO.output(24, 1)         # set GPIO24 to 1/GPIO.HIGH/True  
+			GPIO.output(ledPin, 1)         # set GPIOledPin to 1/GPIO.HIGH/True  
 			sleep(5)   
-			GPIO.output(24, 0) 
+			GPIO.output(ledPin, 0) 
 			GPIO.cleanup() 		
 	except KeyboardInterrupt:          
 		GPIO.cleanup()   

@@ -151,11 +151,13 @@ def verificarMundacaDeParametros():
 			arquivos = [arq for arq in caminhos if os.path.isfile(arq)]
 			for arquivo in arquivos:
 				if(os.path.exists(arquivo)):
+					import ledHD
 					if("parametros.json" in arquivo):						
 						try:
 							shutil.copy2(arquivo, os.path.dirname(os.path.realpath(__file__)))
 							print('Arquivo de Parametros Atualizado!')
+							ledHD.ligarLed()
+							return True
 						except OSError as err:
 							print(" OS error: {0}".format(err))		
-
 		return False
