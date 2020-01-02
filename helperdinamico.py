@@ -14,7 +14,7 @@ try:
     			break
 		for i in range(10):
 			if(downloadHD.openParametros()):
-				#downloadHD.main()
+				downloadHD.main()
 				time.sleep(downloadHD.getDelay())
 			else:
 				break

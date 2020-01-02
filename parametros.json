@@ -3,5 +3,5 @@
     "locomotiva": 9020,
     "origem": "/media/usb",
     "status": "start",
-    "url": "http://172.20.15.22/hd/LogHelperDinamico/SalvarLog"
+    "url": "http://192.168.0.218/hd/LogHelperDinamico/SalvarLog"
 }
