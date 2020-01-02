@@ -1,12 +1,18 @@
 import json
 import io
-import os
 import time
 import socket
+import os
+import shutil
 
+if (os.name == 'posix'):
+	parametros = 'parametros.json'
+else:
+	parametros = 'parametrosTeste.json'
 
 locoHelper = [9020,823,829,832,824,818,9012,857,813,9014,814]
-parametros = 'parametros.json'
+statusLed = False
+
 
 
 data = {
@@ -46,10 +52,7 @@ def IDPenDrive():
 		for linha in temp:
 			if(linha.find('sda1') > 0):
 				 return linha.split(' ')[8]
-					
-                    	
-
-
+					                   	
 def openParametros():
 	if(existeArq(parametros)):
 	
@@ -108,6 +111,9 @@ def alterarURL():
 	data['url'] = str(raw_input("\n1 Digite a URL: "))
 	alterarParametros()	
 
+def getNameFileParametros():
+    	return parametros
+
 def opcoesAlteracao():
 	print ('\n|> Opcoes de Alteracao:')
 	print ('\t1 - Alterar Locomotiva e Delay')
@@ -135,3 +141,21 @@ def alterarParametros():
 			print ('\n|> Salvo com SUCESSO !!!\n')
 	except OSError as err:
 		print(" OS error: {0}".format(err))		
+
+
+def verificarMundacaDeParametros():
+		with open(parametros) as f:    
+			config = json.load(f)
+			pasta = config['origem']
+			caminhos = [os.path.join(pasta, nome) for nome in os.listdir(pasta)]
+			arquivos = [arq for arq in caminhos if os.path.isfile(arq)]
+			for arquivo in arquivos:
+				if(os.path.exists(arquivo)):
+					if("parametros.json" in arquivo):						
+						try:
+							shutil.copy2(arquivo, os.path.dirname(os.path.realpath(__file__)))
+							print('Arquivo de Parametros Atualizado!')
+						except OSError as err:
+							print(" OS error: {0}".format(err))		
+
+		return False

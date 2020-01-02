@@ -1,7 +1,7 @@
 import downloadHD
 import time
 import os
-
+import setparametros as par
 downloadHD.setInicio(time.time())
 
 def reset():
@@ -9,9 +9,11 @@ def reset():
   
 try:  
 	while(downloadHD.openParametros()):
+		par.verificarMundacaDeParametros()
+
 		for i in range(10):
 			if(downloadHD.openParametros()):
-				downloadHD.main()
+				#downloadHD.main()
 				time.sleep(downloadHD.getDelay())
 			else:
 				break

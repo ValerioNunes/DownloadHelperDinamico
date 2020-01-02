@@ -1,14 +1,18 @@
-import RPi.GPIO as GPIO            # import RPi.GPIO module  
+
 from time import sleep             # lets us have a delay  
 import thread
 import time
+import os
 
-GPIO.setmode(GPIO.BCM)            
-GPIO.setup(24, GPIO.OUT)
+statusLed = False
+if (os.name == 'posix'):
+	import RPi.GPIO as GPIO          
+	GPIO.setmode(GPIO.BCM)            
+	GPIO.setup(24, GPIO.OUT)
+	statusLed = True
 
 delay =  1
 led =  True
-
 
 def falhaPendrive():
 	global delay
@@ -25,16 +29,16 @@ def sucesso():
 def print_time( threadName):
 	print(threadName)
 	try:
-
-		while led:
+		if(statusLed):
+			while led:
+				GPIO.output(24, 1)         # set GPIO24 to 1/GPIO.HIGH/True  
+				sleep(delay)                 # wait half a second  
+				GPIO.output(24, 0)         # set GPIO24 to 0/GPIO.LOW/False  
+				sleep(delay) 
 			GPIO.output(24, 1)         # set GPIO24 to 1/GPIO.HIGH/True  
-			sleep(delay)                 # wait half a second  
-			GPIO.output(24, 0)         # set GPIO24 to 0/GPIO.LOW/False  
-			sleep(delay) 
-		GPIO.output(24, 1)         # set GPIO24 to 1/GPIO.HIGH/True  
-		sleep(5)   
-		GPIO.output(24, 0) 
-		GPIO.cleanup() 		
+			sleep(5)   
+			GPIO.output(24, 0) 
+			GPIO.cleanup() 		
 	except KeyboardInterrupt:          
 		GPIO.cleanup()   
 		

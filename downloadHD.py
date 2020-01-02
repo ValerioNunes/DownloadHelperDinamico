@@ -1,9 +1,8 @@
-parametros = 'parametros.json'
+
 
 import json
 import subprocess
 import shutil
-import os 
 import time 
 #import logging
 import restHD
@@ -11,10 +10,16 @@ import zipHD
 import io
 import ledHD	
 import deletarlogs
-
-
+import setparametros as par
+import os
 
 #logging.basicConfig(filename='VSHelpDinamico.log',level=logging.DEBUG)
+
+print(par.getNameFileParametros())
+
+
+parametros = par.getNameFileParametros()
+	
 
 def existeArq(file):
   try:
@@ -38,7 +43,8 @@ def Desligar():
 	print loco['origem']
 	deletarlogs.start(loco['origem'])
 	#os.system("echo '1-1' |sudo tee /sys/bus/usb/drivers/usb/unbind")
-	subprocess.call("/sbin/shutdown -h now", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	if (os.name == 'posix'):
+		subprocess.call("/sbin/shutdown -h now", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 def now():
 	return  time.asctime(time.localtime(time.time()))
@@ -48,8 +54,8 @@ def isPenDrive():
 		caminhos = [os.path.join(pasta, nome) for nome in os.listdir(pasta)]
 		arquivos = [arq for arq in caminhos if os.path.isfile(arq)]
 		if(len(arquivos) > 0):
-			return True;
-		return False 
+			return True
+		return False
 				 
 def moverArquivos():
 
@@ -67,14 +73,13 @@ def moverArquivos():
 				except OSError as err:
 					#logging.warning(now()+" OS error: {0}".format(err))
 					print(now()+" OS error: {0}".format(err))
-					
 				if(existeArq(zipHD.getArquivoZip())):
 					os.remove(zipHD.getArquivoZip())
 	
 					
 	else:
 		#logging.warning(now()+" Pendrive nao encontrado !!! ")
-		print (now()+" Pendrive nao encontrado !!! ")	
+		print (now()+" Nenhum Arquivo Encontrado !!! ")	
 		ledHD.falhaPendrive()
 		
 def openParametros():
