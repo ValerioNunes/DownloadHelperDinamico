@@ -1,7 +1,37 @@
+
 sudo nano /etc/rc.local
 
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 
 sudo nano /etc/network/interfaces
 
+
+sudo apt-get update
+
+sudo apt-get upgrade
+
+sudo apt-get install samba samba-common-bin
+sudo nano /etc/samba/smb.conf
+
+
+[DOREHD]
+Comment = DOREHD FILES
+Path = /home/pi
+Browseable = yes
+Writeable = Yes
+only guest = no
+create mask = 0777
+directory mask = 0777
+Public = yes
+Guest ok = yes
+
+sudo smbpasswd -a pi [senha:cvrdx]
+
+sudo systemctl restart smbd
+sudo chmod 777 /home/pi
+
+sudo apt-get install python-requests
+
 ls -l /dev/disk/by-uuid/
+
+/dev/sda1 /media/usb vfat auto,nofail,noatime,users,rw,uid=pi,gid=pi 0 0
