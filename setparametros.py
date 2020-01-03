@@ -142,6 +142,11 @@ def alterarParametros():
 	except OSError as err:
 		print(" OS error: {0}".format(err))		
 
+def getJsonParametros():
+		config = {}
+		with open(parametros) as f:    
+			config = json.load(f)	
+		return config
 
 def verificarMundacaDeParametros():
 		with open(parametros) as f:    

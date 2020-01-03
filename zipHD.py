@@ -1,7 +1,7 @@
 import os
 import zipfile
 
-Origem     = "/media/usb/test"
+Origem     = "/media/usb"
 ArquivoZip = 'archive.7z'
 
 def ZippArquivo(loco):

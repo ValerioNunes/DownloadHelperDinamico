@@ -15,12 +15,9 @@ import os
 
 #logging.basicConfig(filename='VSHelpDinamico.log',level=logging.DEBUG)
 
-print(par.getNameFileParametros())
-
+print(par.getJsonParametros())
 
 parametros = par.getNameFileParametros()
-	
-
 def existeArq(file):
   try:
     f = open(file)

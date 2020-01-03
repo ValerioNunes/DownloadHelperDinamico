@@ -5,7 +5,9 @@ import setparametros as par
 downloadHD.setInicio(time.time())
 
 def reset():
-	os.system('sudo reboot')
+		config = par.getJsonParametros()
+		if(config['status'] == 'start'):
+			os.system('sudo reboot')
   
 try:  
 	while(downloadHD.openParametros()):
